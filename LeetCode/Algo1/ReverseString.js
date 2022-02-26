@@ -1,4 +1,19 @@
+const runCode = (Event) => {
+    console.log("tığla bana");
 
+    const cars = [1, 2, 3, 4, 5, 6];
+    printArray(cars);;
+    reverseArray(cars);
+    printArray(cars);
+
+
+    let s = "Let's take LeetCode contest";
+    printArray(s);;
+    let reversed = reverseWords(s);
+    printArray(reversed);
+
+    return false;
+}
 
 var printArray = function (arr) {
     const separator = " , ";
@@ -42,7 +57,7 @@ var reverseWords = function (s) {
                 let reversedWord = reverseString(word);
                 result += reversedWord + s[i];
             }
-            wordStart = i+1;
+            wordStart = i + 1;
         } else if (i == s.length - 1) {
             let word = s.substring(wordStart);
             let reversedWord = reverseString(word);
@@ -54,13 +69,3 @@ var reverseWords = function (s) {
 };
 
 
-const cars = [1, 2, 3, 4, 5, 6];
-printArray(cars);;
-reverseArray(cars);
-printArray(cars);
-
-
-let s = "Let's take LeetCode contest";
-printArray(s);;
-let reversed = reverseWords(s);
-printArray(reversed);
