@@ -4,14 +4,14 @@
 // 1 representing a fresh orange, or
 // 2 representing a rotten orange.
 
+
 /**
  * @param {number[][]} grid
  * @return {number}
  */
 var orangesRotting = function (grid) {
-    //find a zeros
     let rottenList = [];
-    let freshList = [];
+    let freshCount = 0;
     for (let r = 0; r < grid.length; r++) {
         for (let c = 0; c < grid[r].length; c++) {
             if (grid[r][c] == 2) {
@@ -23,10 +23,7 @@ var orangesRotting = function (grid) {
             }
             else if (grid[r][c] == 1) {
                 grid[r][c] = -1;
-                freshList.push({
-                    row: r,
-                    column: c
-                });
+                freshCount++;
             }
 
         }
@@ -35,10 +32,8 @@ var orangesRotting = function (grid) {
         return -1;
 
     let max = visitNeighbours(grid, rottenList, 0);
-    for (const i of freshList) {
-        if (grid[i.row][i.column] == -1)
-            return -1;
-    }
+    if (freshCount > 0)
+        return -1;
     return max;
 
 };
@@ -82,10 +77,13 @@ var markAndAddCell = function (newList, mat, r, c, value) {
 var markCell = function (mat, r, c, value) {
     if (r < 0 || c < 0 || r >= mat.length || c >= mat[0].length || mat[r][c] != -1)
         return false;
+
+    freshCount--;
     mat[r][c] = value;
     return true;
 }
 
-let mat = [[2, 1, 1], [0, 1, 1], [1, 0, 1]];
+// let mat = [[2, 1, 1], [0, 1, 1], [1, 1, 1]];
+let mat = [[0,2]];
 let result = orangesRotting(mat);
 console.log(result);
