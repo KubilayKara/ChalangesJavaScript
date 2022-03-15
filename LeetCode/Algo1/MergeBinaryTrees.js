@@ -1,3 +1,5 @@
+
+console.log("Merge Binary Trees");
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -69,11 +71,38 @@ var connect = function (root) {
     let current = root;
     while (current != null) {
         if (tmp != undefined)
-            tmp.right.next = current.left;        
-        current.lef.next = current.right;
+            tmp.right.next = current.left;
+        current.left.next = current.right;
         tmp = current;
         current = current.next;
     }
     connect(grandChildren);
+    return root;
+};
+
+/**
+ * @param {Node} root
+ * @return {Node}
+ */
+var connect2 = function (root) {
+
+    if (root == null || root.left == null)
+        return root;
+
+    let leftMostNode = root;
+
+
+    while (leftMostNode != null) {
+        let current = leftMostNode;
+        let previousRight;
+        while (current != null && current.left!=null) {
+            current.left.next = current.right;
+            if (previousRight != null)
+                previousRight.next = current.left;
+            previousRight = current.right;
+            current = current.next;
+        }
+        leftMostNode = leftMostNode.left;
+    }
     return root;
 };
